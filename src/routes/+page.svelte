@@ -5,11 +5,13 @@
 	import BookCard from '$lib/components/Book_card.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Shelf from '$lib/components/Shelf.svelte';
+	export let data;
+	// console.log(data);
 </script>
 
 <!-- <Page1/>
 <Home2/>
 <Home1/> -->
 
-<Shelf />
+<Shelf books={data.books} />
 <!-- <BookCard /> -->
