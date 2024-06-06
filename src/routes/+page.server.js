@@ -1,35 +1,44 @@
 export const prerender = true;
-const propToConvert = ['authors', 'genres', 'categories', 'translators'];
+const propToConvert = {
+	authors: 'name',
+	genres: 'name',
+	categories: 'name',
+	translators: 'name',
+	reviews: 'content'
+};
 
 const endpoints = {
 	authors: '/api/notion/authors',
 	genres: '/api/notion/genres',
 	categories: '/api/notion/categories',
-	translators: '/api/notion/translators'
+	translators: '/api/notion/translators',
+	reviews: '/api/notion/reviews'
 };
 
 // Fetch related data from the specified API routes
 async function fetchRelatedData(fetch) {
-	const promises = propToConvert.map((prop) => fetch(endpoints[prop]).then((res) => res.json()));
+	const promises = Object.keys(propToConvert).map((prop) =>
+		fetch(endpoints[prop]).then((res) => res.json())
+	);
 	const results = await Promise.all(promises);
 
 	const relatedData = {};
-	propToConvert.forEach((prop, index) => {
+	Object.keys(propToConvert).forEach((prop, index) => {
 		relatedData[prop] = results[index];
 	});
 
 	return relatedData;
 }
 
-// Convert IDs to names for the specified properties
+// Convert IDs to names or content for the specified properties
 function convertIdsToNames(item, relatedData) {
 	const convertedItem = { ...item };
 
-	for (const prop of propToConvert) {
+	for (const prop in propToConvert) {
 		if (Array.isArray(convertedItem[prop])) {
 			convertedItem[prop] = convertedItem[prop].map((id) => {
 				const entry = relatedData[prop].find((e) => e.id === id);
-				return entry ? entry.name : id;
+				return entry ? entry[propToConvert[prop]] : id;
 			});
 		}
 	}
@@ -37,7 +46,7 @@ function convertIdsToNames(item, relatedData) {
 	return convertedItem;
 }
 
-// Fetch books and related data, then convert IDs to names
+// Fetch books and related data, then convert IDs to names or content
 export async function load({ fetch }) {
 	try {
 		const [booksResponse, relatedData] = await Promise.all([

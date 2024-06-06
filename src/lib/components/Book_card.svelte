@@ -1,7 +1,7 @@
 <script>
 	import * as Card from '$lib/components/ui/card';
 	export let book;
-	let { authors, name, images } = book;
+	let { authors, name, images, reviews } = book;
 </script>
 
 <div
@@ -15,6 +15,7 @@
 		<Card.Header class="grid gap-1 p-4">
 			<Card.Title>{name}</Card.Title>
 			<Card.Description>{authors}</Card.Description>
+			<Card.Content>{reviews}</Card.Content>
 		</Card.Header>
 	</Card.Root>
 </div>
