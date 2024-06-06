@@ -1,7 +1,9 @@
 // src/routes/api/notion/[dbName]/+server.js
-import { notion } from '$lib/notionClient';
-import { retryWithBackoff } from '$lib/utils/retryWithBackoff';
-import { notionDbMapping } from '$lib/notionDbMapping';
+import { notion } from '$lib/notion/notionClient';
+import { retryWithBackoff } from '$lib//notion/retryWithBackoff';
+import { notionDbMapping } from '$lib/notion/notionDbMapping';
+import { convertPropertiesDynamically } from '$lib/notion/convertProperties.js';
+import { schema } from '$lib/notion/schema.js';
 
 // In-memory cache (for demonstration purposes)
 let cache = {};
@@ -18,7 +20,7 @@ async function fetchNotionData(databaseId, cursor) {
 	return response;
 }
 
-async function getNotionData(databaseId) {
+async function getNotionData(databaseId, schema) {
 	if (cache[databaseId] && cache[databaseId].expiry > Date.now()) {
 		return cache[databaseId].data;
 	}
@@ -32,6 +34,10 @@ async function getNotionData(databaseId) {
 		cursor = response.next_cursor;
 	} while (cursor);
 
+	// Convert properties dynamically
+	if (schema) {
+		results = results.map((page) => convertPropertiesDynamically(page, schema));
+	}
 	// Cache the results for 1 hour
 	cache[databaseId] = {
 		data: results,
@@ -53,7 +59,8 @@ export async function GET({ params }) {
 	}
 
 	try {
-		const data = await getNotionData(databaseId);
+		const data = await getNotionData(databaseId, schema[dbName]);
+
 		return new Response(JSON.stringify(data), {
 			headers: { 'Content-Type': 'application/json' }
 		});
