@@ -1,9 +1,12 @@
-// src/routes/api/notion/[dbName]/+server.js
 import { notion } from '$lib/notion/notionClient';
-import { retryWithBackoff } from '$lib//notion/retryWithBackoff';
+import { retryWithBackoff } from '$lib/notion/retryWithBackoff';
 import { notionDbMapping } from '$lib/notion/notionDbMapping';
 import { convertPropertiesDynamically } from '$lib/notion/convertProperties.js';
 import { schema } from '$lib/notion/schema.js';
+import { NotionToMarkdown } from 'notion-to-md';
+
+// Initialize NotionToMarkdown instance
+const n2m = new NotionToMarkdown({ notionClient: notion });
 
 // In-memory cache (for demonstration purposes)
 let cache = {};
@@ -18,6 +21,12 @@ async function fetchNotionData(databaseId, cursor) {
 	});
 
 	return response;
+}
+
+async function getContent(id) {
+	const contentBlocks = await notion.blocks.children.list({ block_id: id });
+	const mdBlocks = await n2m.blocksToMarkdown(contentBlocks.results);
+	return n2m.toMarkdownString(mdBlocks);
 }
 
 async function getNotionData(databaseId, schema) {
@@ -36,8 +45,17 @@ async function getNotionData(databaseId, schema) {
 
 	// Convert properties dynamically
 	if (schema) {
-		results = results.map((page) => convertPropertiesDynamically(page, schema));
+		results = await Promise.all(
+			results.map(async (page) => {
+				const convertedPage = convertPropertiesDynamically(page, schema);
+				if (schema.childContent) {
+					convertedPage.content = await schema.childContent(page.id);
+				}
+				return convertedPage;
+			})
+		);
 	}
+
 	// Cache the results for 1 hour
 	cache[databaseId] = {
 		data: results,

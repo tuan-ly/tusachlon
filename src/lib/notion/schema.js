@@ -1,3 +1,13 @@
+import { NotionToMarkdown } from 'notion-to-md';
+import { notion } from '$lib/notion/notionClient';
+
+const n2m = new NotionToMarkdown({ notionClient: notion });
+
+async function getContent(id) {
+	const pageMd = await n2m.pageToMarkdown(id);
+	return n2m.toMarkdownString(pageMd).parent;
+}
+
 export const schema = {
 	books: {
 		name: 'Name',
@@ -9,7 +19,8 @@ export const schema = {
 		images: 'Images'
 	},
 	reviews: {
-		name: 'Name'
+		name: 'Name',
+		childContent: getContent
 	},
 	authors: {
 		name: 'Name'
