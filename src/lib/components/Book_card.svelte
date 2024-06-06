@@ -2,7 +2,6 @@
 	import * as Card from '$lib/components/ui/card';
 	export let book;
 	let { authors, name, images } = book;
-	authors = authors.map((author) => author.name).join(', ');
 </script>
 
 <div
