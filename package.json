@@ -3,9 +3,8 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"clean": "rimraf build",
 		"dev": "vite dev",
-		"build": "npm run clean && vite build",
+		"build": " vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
