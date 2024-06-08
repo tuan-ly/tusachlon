@@ -64,3 +64,4 @@ export async function GET({ fetch, params }) {
 		});
 	}
 }
+export const prerender = true;
