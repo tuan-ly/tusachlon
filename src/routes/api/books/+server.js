@@ -3,7 +3,7 @@ const propToConvert = {
 	genres: 'name',
 	categories: 'name',
 	translators: 'name',
-	reviews: 'content'
+	description: 'name'
 };
 
 const endpoints = {
@@ -11,7 +11,7 @@ const endpoints = {
 	genres: '/api/notion/genres',
 	categories: '/api/notion/categories',
 	translators: '/api/notion/translators',
-	reviews: '/api/notion/reviews'
+	description: '/api/notion/reviews'
 };
 
 // Fetch related data from the specified API routes
@@ -39,6 +39,12 @@ function convertIdsToNames(item, relatedData) {
 				const entry = relatedData[prop].find((e) => e.id === id);
 				return entry ? entry[propToConvert[prop]] : id;
 			});
+		} else {
+			//if not array then it is an id string without the "-" in it (not uuid)
+			const entry = relatedData[prop].find(
+				(e) => e.id.replaceAll('-', '') === convertedItem[prop].replaceAll('-', '')
+			);
+			convertedItem[prop] = entry ? entry[propToConvert[prop]] : convertedItem[prop];
 		}
 	}
 
