@@ -19,6 +19,9 @@ const config = {
 			precompress: false,
 			strict: true
 		}),
+		files: {
+			assets: 'public'
+		},
 		prerender: {
 			// Add routes here
 			entries: ['*']
