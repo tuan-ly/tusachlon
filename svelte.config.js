@@ -20,7 +20,7 @@ const config = {
 			strict: true
 		}),
 		files: {
-			assets: 'public'
+			assets: 'static'
 		},
 		prerender: {
 			// Add routes here
