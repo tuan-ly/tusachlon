@@ -20,7 +20,8 @@ export const schema = {
 		images: 'Images'
 	},
 	reviews: {
-		name: 'Name' //,		childContent: getContent
+		name: 'Name',
+		childContent: getContent
 	},
 	authors: {
 		name: 'Name'

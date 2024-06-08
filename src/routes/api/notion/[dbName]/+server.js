@@ -83,4 +83,3 @@ export async function GET({ params }) {
 		});
 	}
 }
-export const prerender = true;
