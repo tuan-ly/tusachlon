@@ -71,5 +71,3 @@ export async function GET({ fetch }) {
 		});
 	}
 }
-
-export const prerender = true;
