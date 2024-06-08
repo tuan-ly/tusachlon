@@ -72,4 +72,4 @@ export async function GET({ fetch }) {
 	}
 }
 
-export const prerender = true;
+// export const prerender = true;
