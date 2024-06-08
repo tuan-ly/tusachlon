@@ -5,6 +5,8 @@
 	import BookCard from '$lib/components/Book_card.svelte';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Shelf from '$lib/components/Shelf.svelte';
+	import Book from '$lib/components/Book.svelte';
+
 	export let data;
 	// console.log(data);
 </script>
@@ -12,6 +14,7 @@
 <!-- <Page1/>
 <Home2/>
 <Home1/> -->
-
-<Shelf books={data.books} />
-<!-- <BookCard /> -->
+<main class="bg-gray-100">
+	<Shelf books={data.books} />
+	<!-- <BookCard /> -->
+</main>
