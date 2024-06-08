@@ -23,12 +23,6 @@ async function fetchNotionData(databaseId, cursor) {
 	return response;
 }
 
-async function getContent(id) {
-	const contentBlocks = await notion.blocks.children.list({ block_id: id });
-	const mdBlocks = await n2m.blocksToMarkdown(contentBlocks.results);
-	return n2m.toMarkdownString(mdBlocks);
-}
-
 async function getNotionData(databaseId, schema) {
 	if (cache[databaseId] && cache[databaseId].expiry > Date.now()) {
 		return cache[databaseId].data;
@@ -47,10 +41,10 @@ async function getNotionData(databaseId, schema) {
 	if (schema) {
 		results = await Promise.all(
 			results.map(async (page) => {
-				const convertedPage = convertPropertiesDynamically(page, schema);
-				if (schema.childContent) {
-					convertedPage.content = await schema.childContent(page.id);
-				}
+				const convertedPage = await convertPropertiesDynamically(page, schema);
+				// if (schema.childContent) {
+				// 	convertedPage.content = await schema.childContent(page.id);
+				// }
 				return convertedPage;
 			})
 		);
