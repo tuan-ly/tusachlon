@@ -83,3 +83,8 @@ export async function GET({ params }) {
 		});
 	}
 }
+
+/** @type {import('./$types').EntryGenerator} */ export function entries() {
+	return [{ dbName: 'books' }, { dbName: 'reviews' }];
+}
+export const prerender = true;
