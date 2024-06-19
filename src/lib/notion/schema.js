@@ -17,7 +17,8 @@ export const schema = {
 		genres: 'Genres [DB]',
 		translators: 'Translators [DB]',
 		description: 'Main Review ID',
-		images: 'Images'
+		images: 'Images',
+		url: 'Product URL'
 	},
 	reviews: {
 		name: 'Name',
@@ -45,7 +46,8 @@ export const pageSchema = {
 		genres: 'Genres [DB]',
 		translators: 'Translators [DB]',
 		description: 'Main Review ID',
-		images: 'Images'
+		images: 'Images',
+		url: 'Product URL'
 	},
 	reviews: {
 		name: 'Name',

@@ -5,7 +5,7 @@
 	let isTooLong = false;
 	let isTruncated = true;
 
-	const maxHeight = 100; // Max height in pixels before truncation
+	const maxHeight = 200; // Max height in pixels before truncation
 
 	onMount(() => {
 		isTooLong = contentEl.scrollHeight > maxHeight;
@@ -16,21 +16,23 @@
 	}
 </script>
 
-<div bind:this={contentEl} class="content" class:expanded={!isTruncated}>
-	<slot />
-</div>
-
-{#if isTooLong}
-	<div class="show" class:show-more={isTruncated} class:show-less={!isTruncated}>
-		<button class="hover:underline" on:click={toggleContent}>
-			{isTruncated ? 'Show More' : 'Show Less'}
-		</button>
+<div class="relative">
+	<div bind:this={contentEl} class="content" class:expanded={!isTruncated}>
+		<slot />
 	</div>
-{/if}
+
+	{#if isTooLong}
+		<div class="show" class:show-more={isTruncated} class:show-less={!isTruncated}>
+			<button class="hover:underline" on:click={toggleContent}>
+				{isTruncated ? 'Show More' : 'Show Less'}
+			</button>
+		</div>
+	{/if}
+</div>
 
 <style>
 	.content {
-		max-height: 100px; /* Match the maxHeight in the script */
+		max-height: 200px; /* Match the maxHeight in the script */
 		overflow: hidden;
 		transition: max-height 0.3s ease;
 	}
@@ -55,6 +57,7 @@
 	.show-less {
 		/* Remove the default button styles */
 		background: none;
+		position: relative;
 		/* display: none; Hide the button if not truncated */
 	}
 </style>

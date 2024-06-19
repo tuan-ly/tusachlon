@@ -6,6 +6,7 @@
 	import Navbar from '$lib/components/Navbar.svelte';
 	import Shelf from '$lib/components/Shelf.svelte';
 	import Book from '$lib/components/Book.svelte';
+	import Sheet from '$lib/components/sheet.svelte';
 
 	export let data;
 	// console.log(data);
@@ -18,3 +19,4 @@
 	<Shelf books={data.books} />
 	<!-- <BookCard /> -->
 </main>
+<Sheet />
