@@ -24,7 +24,7 @@
 	{#if isTooLong}
 		<div class="show" class:show-more={isTruncated} class:show-less={!isTruncated}>
 			<button class="hover:underline" on:click={toggleContent}>
-				{isTruncated ? 'Show More' : 'Show Less'}
+				{isTruncated ? 'Xem thêm' : 'Rút gọn'}
 			</button>
 		</div>
 	{/if}
