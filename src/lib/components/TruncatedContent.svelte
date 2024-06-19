@@ -24,7 +24,11 @@
 	{#if isTooLong}
 		<div class="show" class:show-more={isTruncated} class:show-less={!isTruncated}>
 			<button class="hover:underline" on:click={toggleContent}>
-				{isTruncated ? 'Xem thêm' : 'Rút gọn'}
+				{#if isTruncated}
+					<img src="/arrow-down-double.svg" alt="arrow down" />
+				{:else}
+					<img src="/arrow-up-double.svg" alt="arrow up" />
+				{/if}
 			</button>
 		</div>
 	{/if}
@@ -45,7 +49,7 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		height: 5rem; /* Adjust height as needed */
+		height: 3rem; /* Adjust height as needed */
 		display: flex;
 		justify-content: center;
 		align-items: end;
