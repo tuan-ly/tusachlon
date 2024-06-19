@@ -35,25 +35,19 @@
 							aria-current="page">Home</a
 						>
 					</li>
+
 					<li>
 						<a
-							href="#"
+							href="#genres"
+							class="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"
+							>Genres</a
+						>
+					</li>
+					<li>
+						<a
+							href="#about"
 							class="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"
 							>About</a
-						>
-					</li>
-					<li>
-						<a
-							href="#"
-							class="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"
-							>Services</a
-						>
-					</li>
-					<li>
-						<a
-							href="#"
-							class="block rounded py-2 pl-3 pr-4 text-gray-700 hover:bg-gray-100 md:border-0 md:p-0 md:hover:bg-transparent md:hover:text-blue-700"
-							>Contact</a
 						>
 					</li>
 				</ul>
