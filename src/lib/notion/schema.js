@@ -1,12 +1,14 @@
 import { NotionToMarkdown } from 'notion-to-md';
 import { notion } from '$lib/notion/notionClient';
-
+import { getPageHtml } from './notionToHtml';
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
 //note that all the function pass through schema have to take argument pageId
 async function getContent(pageId) {
-	const pageMd = await n2m.pageToMarkdown(pageId);
-	return n2m.toMarkdownString(pageMd);
+	return await getPageHtml(pageId);
+	// const pageMd = await n2m.pageToMarkdown(pageId);
+	// console.log(h);
+	// return n2m.toMarkdownString(pageMd);
 }
 
 export const schema = {
