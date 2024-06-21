@@ -39,6 +39,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@notion-render/client": "^0.0.2",
 		"@notionhq/client": "^2.2.15",
 		"bits-ui": "^0.21.10",
 		"clsx": "^2.1.1",
