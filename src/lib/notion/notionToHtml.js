@@ -81,8 +81,8 @@ async function getChildBlocks(blockId) {
 }
 
 export async function getPageHtml(pageId) {
-	const response = await notion.blocks.children.list({ block_id: pageId });
-	const html = await convertBlocksToHtml(response.results);
+	const { results } = await notion.blocks.children.list({ block_id: pageId });
+	const html = await convertBlocksToHtml(results);
 	return html;
 }
 

@@ -1,16 +1,15 @@
 import { NotionToMarkdown } from 'notion-to-md';
 import { notion } from '$lib/notion/notionClient';
-import { getPageHtml } from './notionToHtml';
+import { getContentBlocks } from '../notion';
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
 //note that all the function pass through schema have to take argument pageId
-async function getContent(pageId) {
-	return await getPageHtml(pageId);
-	// const pageMd = await n2m.pageToMarkdown(pageId);
-	// console.log(h);
-	// return n2m.toMarkdownString(pageMd);
-}
-
+// async function getContent(pageId) {
+// return await getPageHtml(pageId);
+// const pageMd = await n2m.pageToMarkdown(pageId);
+// console.log(h);
+// return n2m.toMarkdownString(pageMd);
+// }
 export const schema = {
 	books: {
 		name: 'Name',
@@ -24,7 +23,7 @@ export const schema = {
 	},
 	reviews: {
 		name: 'Name',
-		childContent: getContent
+		pageContentBlocks: getContentBlocks
 	},
 	authors: {
 		name: 'Name'
@@ -53,7 +52,7 @@ export const pageSchema = {
 	},
 	reviews: {
 		name: 'Name',
-		childContent: getContent
+		pageContentBlocks: getContentBlocks
 	},
 	authors: {
 		name: 'Name'
