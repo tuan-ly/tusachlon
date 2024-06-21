@@ -19,7 +19,7 @@
 				<div class="mb-4">
 					<h4 class="mb-2 text-lg font-semibold">Description</h4>
 					<TruncatedContent>
-						<div class="text-xl text-gray-700">
+						<div class="max-w-2xl text-base text-gray-700">
 							<div class="styleHtml">
 								{@html book.description}
 								<p></p>
@@ -29,7 +29,7 @@
 				</div>
 			</div>
 			<div class="mt-6 flex flex-col md:mt-0 md:w-1/3">
-				<div class="sticky flex flex-col">
+				<div class="sticky top-4 flex flex-col">
 					<img src={book.images[0]} alt="Book Cover" class="rounded-lg" />
 					<a
 						href={book.url}
