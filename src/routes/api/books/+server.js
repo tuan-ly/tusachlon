@@ -3,7 +3,7 @@ const propToConvert = {
 	genres: 'name',
 	categories: 'name',
 	translators: 'name',
-	description: 'childContent'
+	description: 'contentHtml'
 };
 
 const endpoints = {

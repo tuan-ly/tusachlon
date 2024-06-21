@@ -28,24 +28,18 @@
 					</TruncatedContent>
 				</div>
 			</div>
-			<div class="mt-6 flex flex-col justify-center md:mt-0 md:w-1/3">
-				<img src={book.images[0]} alt="Book Cover" class="rounded-lg" />
-				<a
-					href={book.url}
-					target="_blank"
-					class="mx-auto mt-4 inline-block w-[50%] rounded bg-blue-500 px-4 py-2 text-center font-bold text-white hover:bg-blue-700"
-				>
-					Read Book
-				</a>
+			<div class="mt-6 flex flex-col md:mt-0 md:w-1/3">
+				<div class="sticky flex flex-col">
+					<img src={book.images[0]} alt="Book Cover" class="rounded-lg" />
+					<a
+						href={book.url}
+						target="_blank"
+						class="mx-auto mt-4 inline-block w-[50%] rounded bg-blue-500 px-4 py-2 text-center font-bold text-white hover:bg-blue-700"
+					>
+						Read Book
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
 </section>
-
-<style>
-	.styleHtml * {
-		margin-top: 1rem;
-		margin-bottom: 1rem;
-		color: red;
-	}
-</style>

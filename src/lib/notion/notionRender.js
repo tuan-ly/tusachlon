@@ -8,6 +8,6 @@ export async function getPageHtml(pageId) {
 		block_id: pageId
 	});
 	const html = await renderer.render(...results);
-	console.log(html);
+	// console.log(html);
 	return html;
 }
